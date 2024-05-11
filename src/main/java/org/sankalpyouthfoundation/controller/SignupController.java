@@ -1,5 +1,6 @@
 package org.sankalpyouthfoundation.controller;
 
+import org.sankalpyouthfoundation.model.LoginRequest;
 import org.sankalpyouthfoundation.model.Signup;
 import org.sankalpyouthfoundation.service.SignupService;
 import org.sankalpyouthfoundation.util.Message;
@@ -50,4 +51,22 @@ public class SignupController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
         }
     }
+
+    @PostMapping("/api/login")
+    public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest){
+        Optional<Signup> result = this.signupService.findById(loginRequest.getEmail());
+        if(!result.isEmpty() && result.get().getEmail().equals(loginRequest.getEmail())){
+            if(result.get().getPassword().equals(loginRequest.getPassword())){
+                Message message = new Message("Success", "Login Successful!");
+                return ResponseEntity.status(HttpStatus.OK).body(message);
+            }else{
+                Message message = new Message("Unauthorized", "Wrong credentials. Please enter correct details.");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
+            }
+        }else {
+            Message message = new Message("No Account exist with this mail", "Please register yourself!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+    }
+
 }
