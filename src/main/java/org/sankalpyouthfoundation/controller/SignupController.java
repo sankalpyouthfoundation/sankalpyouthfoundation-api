@@ -61,11 +61,11 @@ public class SignupController {
                 return ResponseEntity.status(HttpStatus.OK).body(message);
             }else{
                 Message message = new Message("Unauthorized", "Wrong credentials. Please enter correct details.");
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
+                return ResponseEntity.status(HttpStatus.OK).body(message);
             }
         }else {
             Message message = new Message("No Account exist with this mail", "Please register yourself!");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+            return ResponseEntity.status(HttpStatus.OK).body(message);
         }
     }
 
