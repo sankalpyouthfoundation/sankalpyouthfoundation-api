@@ -34,11 +34,11 @@ public class CompetitionController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @DeleteMapping("/api/competitions")
-    public ResponseEntity<Object> deleteById(@RequestBody Competition competition){
-        Optional<Competition> data  = this.competitionService.findById(competition.getId());
+    @DeleteMapping("/api/competitions/{id}")
+    public ResponseEntity<Object> deleteById(@PathVariable("id") String id){
+        Optional<Competition> data  = this.competitionService.findById(id);
         if(data.isPresent()){
-            this.competitionService.deleteById(competition.getId());
+            this.competitionService.deleteById(id);
             Message message = new Message("Success", "Successfully deleted!");
             return ResponseEntity.status(HttpStatus.OK).body(message);
         }
