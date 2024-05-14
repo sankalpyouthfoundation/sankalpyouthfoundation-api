@@ -35,6 +35,9 @@ public class SignupController {
     @GetMapping("/api/signup/data")
     public ResponseEntity<List<Signup>> getAllSignupData(){
         List<Signup> data = this.signupService.findAll();
+        for(Signup signup : data){
+            signup.setPassword(null);
+        }
         return ResponseEntity.status(HttpStatus.OK).body(data);
     }
 
