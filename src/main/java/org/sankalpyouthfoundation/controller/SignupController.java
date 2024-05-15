@@ -69,7 +69,8 @@ public class SignupController {
         if(!result.isEmpty() && result.get().getEmail().equals(loginRequest.getEmail())){
             if(result.get().getPassword().equals(loginRequest.getPassword())){
                 Message message = new Message("Success", "Login Successful!");
-                return ResponseEntity.status(HttpStatus.OK).body(message);
+                result.get().setPassword(null);
+                return ResponseEntity.status(HttpStatus.OK).body(result.get());
             }else{
                 Message message = new Message("Unauthorized", "Wrong credentials. Please enter correct details.");
                 return ResponseEntity.status(HttpStatus.OK).body(message);
