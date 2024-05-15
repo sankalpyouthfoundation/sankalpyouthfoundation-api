@@ -55,10 +55,10 @@ public class StudentController {
         competitionList.add(student.getCompetition());
         studentResponse.setCompetitions(competitionList);
         StudentResponse response = this.studentService.save(studentResponse);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/api/students")
+    @PostMapping("/api/students/fetch")
     public ResponseEntity<Object> findStudentByContactandFirstName(@RequestBody StudentSearch studentSearch){
         List<StudentResponse> result = this.studentService.findByContactAndFirstname(studentSearch.getContact(), studentSearch.getFirstname());
         if(null != result && !result.isEmpty()){
