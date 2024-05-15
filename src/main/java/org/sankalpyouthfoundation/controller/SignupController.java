@@ -32,6 +32,13 @@ public class SignupController {
         }
     }
 
+    @PutMapping("/api/signup")
+    public ResponseEntity<Object> updateSignupData(@RequestBody Signup signup){
+        this.signupService.save(signup);
+        Message message = new Message("Success","Update Successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(message);
+    }
+
     @GetMapping("/api/signup")
     public ResponseEntity<List<Signup>> getAllSignupData(){
         List<Signup> data = this.signupService.findAll();
