@@ -32,7 +32,7 @@ public class SignupController {
         }
     }
 
-    @GetMapping("/api/signup/data")
+    @GetMapping("/api/signup")
     public ResponseEntity<List<Signup>> getAllSignupData(){
         List<Signup> data = this.signupService.findAll();
         for(Signup signup : data){
