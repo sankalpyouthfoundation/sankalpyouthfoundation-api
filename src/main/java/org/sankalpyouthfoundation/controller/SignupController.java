@@ -25,7 +25,8 @@ public class SignupController {
             signup.setAdmin(false);
             Signup data = this.signupService.save(signup);
             Message success = new Message("Success", "Signup Successfully!");
-            return ResponseEntity.status(HttpStatus.CREATED).body(success);
+            data.setPassword("null");
+            return ResponseEntity.status(HttpStatus.OK).body(data);
         }else {
             Message error = new Message("Error", "User Already Exist!");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
