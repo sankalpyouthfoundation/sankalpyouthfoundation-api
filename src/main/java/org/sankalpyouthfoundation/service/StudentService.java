@@ -12,6 +12,6 @@ import java.util.List;
 public interface StudentService extends MongoRepository<StudentResponse, LocalDateTime> {
     //public List<StudentResponse> findByContact(String contact);
 
-    @Query("{ 'contact': ?0, 'firstname': { $regex: ?1, $options: 'i' } }")
+    @Query("{ 'contact': { $regex: ?0, $options: 'i' }, 'firstname': { $regex: ?1, $options: 'i' } }")
     public List<StudentResponse> findByContactAndFirstname(String contact, String firstname);
 }
