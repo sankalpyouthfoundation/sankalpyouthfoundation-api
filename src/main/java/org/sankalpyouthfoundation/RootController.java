@@ -8,6 +8,6 @@ public class RootController {
 
     @GetMapping("/")
     public String healthCheck(){
-        return "Sankalp Youth foundation application is up and running on v1.13";
+        return "Sankalp Youth foundation application is up and running on v1.14";
     }
 }
