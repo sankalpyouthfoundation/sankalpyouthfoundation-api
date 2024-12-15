@@ -14,4 +14,5 @@ public class Competition {
     private String title;
     private String name;
     private String rank;
+    private boolean isPresent;
 }
