@@ -1,18 +1,12 @@
 package org.sankalpyouthfoundation.controller;
 
-import org.sankalpyouthfoundation.model.Competition;
-import org.sankalpyouthfoundation.model.StudentResponse;
-import org.sankalpyouthfoundation.model.StudentRegisterRequest;
-import org.sankalpyouthfoundation.model.StudentSearch;
+import org.sankalpyouthfoundation.model.*;
 import org.sankalpyouthfoundation.service.StudentService;
 import org.sankalpyouthfoundation.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -66,6 +60,15 @@ public class StudentController {
         }
         Message message = new Message("error", "No record found!");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+    }
+
+    @PostMapping("/api/students/update")
+    public ResponseEntity<Object> updateStudentRecord(@RequestBody StudentResponse response){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        response.setTimestamp(localDateTime);
+        this.studentService.save(response);
+        Message message = new Message("Success","Update Successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(message);
     }
 
     private boolean checkCompetitionParticipation(StudentRegisterRequest student, StudentResponse obj) {
